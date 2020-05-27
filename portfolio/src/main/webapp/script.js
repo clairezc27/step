@@ -26,3 +26,23 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function scrollMe() {
+    var me = document.getElementById('me');
+    me.scrollIntoView(true);
+}
+
+function scrollCat() {
+    var cat = document.getElementById('cat');
+    cat.scrollIntoView(true);
+}
+
+function scrollFavs() {
+    var favs = document.getElementById('favs');
+    favs.scrollIntoView(true);
+}
+
+function scrollGallery() {
+    var gallery = document.getElementById('gallery');
+    gallery.scrollIntoView(true);
+}
