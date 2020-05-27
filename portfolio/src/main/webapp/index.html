@@ -10,33 +10,41 @@
     <div id="content">
       <h1>Claire's Portfolio</h1>
       
-      <p>Click here to get a random message:</p>
-      <button onclick="scrollGallery()">Hello</button>
+      <button class="button" onclick="scrollMe()">About Me</button>
+      <button class="button" onclick="scrollCat()">My Cat</button>
+      <button class="button" onclick="scrollFavs()">Favorites</button>
+      <button class="button" onclick="scrollGallery()">Gallery</button>
       <div id="greeting-container"></div>
 
     </div>
     <div id="me" class="box">
       <h2>About Me</h2>
-      <p>Hi! My name is Claire, and I'm a rising junior majoring in computer science Georgia Tech. I'm currently a STEP intern, and working from Maryland.
-        I was first introduced to computer science my freshmen year of high school. Since then, I have developed my passion for computing through internships, hackathons, and technology clubs.
-        My first internship was at the National Institute of Health to conduct bioinformatics research. 
-        I was very thankful to work there, but quickly realized that I was terrible at the biology part of bioinformatics.
-        Last summer, I interned at State Farm as a front end software development intern, where I gained experience with Angular, HTML/CSS/Javascript, and ping pong.
-        In my free time, I like to paint, play tennis, and hike. 
-      </p>
+      <div style="display: flex;">
+        <img style="vertical-align:middle; padding-right: 20px;"src="images/profile.jpg"/>
+        <span>Hi! My name is Claire, and I'm a rising junior majoring in computer science Georgia Tech. I'm currently a STEP intern, and working from Maryland.
+          I was first introduced to computer science my freshmen year of high school. Since then, I have developed my passion for computing through internships, hackathons, and technology clubs.
+          My first internship was at the National Institute of Health to conduct bioinformatics research. 
+          I was very thankful to work there, but quickly realized that I was terrible at the biology part of bioinformatics.
+          Last summer, I interned at State Farm as a front end software development intern, where I gained experience with Angular, HTML/CSS/Javascript, and ping pong.
+          In my free time, I like to paint, play tennis, and hike. 
+        </span>
+      </div>
     </div>
 
     <div id="cat" class="box">
       <h2>My Cat</h2> 
+      <div style="display: flex;">
+        <img style="vertical-align:middle; padding-right: 20px;"src="images/chia.jpeg"/>
 
-      <p>This is my WFH colleague, Chia. 
+        <span>This is my WFH colleague, Chia. 
         I adopted her over last December, and now she follows me on my adventures, ranging from spring semester at Georgia Tech, to interning now.
         She is currently 9 months and growing bigger everyday! Some of Chia's hobbies include: napping, chasing toy mice, and staring longingly at squirrels from the window. 
         Chia is excited to be on board my intern experience. 
         She first became interested in coding when she ran across my keyboard a few months ago. Unfortunately, the lines of code she typed did not compile.
         Since then, Chia has been brushing up on her coding skills by pair programming with me. She does not give much input, though. 
-        However, she is looking forward to learning a lot this summer, and maybe one day will be able to compile her code!</p>
-      <img src="images/chia.jpeg"/>
+        However, she is looking forward to learning a lot this summer, and maybe one day will be able to compile her code!</span>
+      </div>
+     
     </div>
 
     <div id="favs" class="box">

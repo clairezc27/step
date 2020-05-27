@@ -28,21 +28,35 @@ function addRandomGreeting() {
 }
 
 function scrollMe() {
-    var me = document.getElementById('me');
-    me.scrollIntoView(true);
+  var me = document.getElementById('me');
+  me.scrollIntoView(true);
 }
 
 function scrollCat() {
-    var cat = document.getElementById('cat');
-    cat.scrollIntoView(true);
+  var cat = document.getElementById('cat');
+  cat.scrollIntoView(true);
 }
 
 function scrollFavs() {
-    var favs = document.getElementById('favs');
-    favs.scrollIntoView(true);
+  var favs = document.getElementById('favs');
+  favs.scrollIntoView(true);
 }
 
 function scrollGallery() {
-    var gallery = document.getElementById('gallery');
-    gallery.scrollIntoView(true);
+  var gallery = document.getElementById('gallery');
+  gallery.scrollIntoView(true);
+}
+
+var picIndex = 0;
+
+function displayPic() {
+  const imgUrl = 'images/gallery-' + picIndex%10 + '.jpg';
+  const imgElement = document.createElement('img');
+  imgElement.src = imgUrl;
+
+  const imageContainer = document.getElementById('gallery-img-container');
+  // Remove the previous image.
+  imageContainer.innerHTML = '';
+  imageContainer.appendChild(imgElement);
+  picIndex++;
 }

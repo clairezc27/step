@@ -12,6 +12,17 @@
     margin: auto;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.button {
+    background-color: mediumaquamarine;
+    border: none;
+    color: white;
+    padding: 5%;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#gallery-img-container {
+    margin-top: auto;
 }
