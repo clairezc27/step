@@ -47,6 +47,13 @@ function scrollGallery() {
   gallery.scrollIntoView(true);
 }
 
+function scroll(id) {
+  console.log("scroll to: " + id);
+  var item = document.getElementById(id);
+  console.log(item);
+  item.scrollIntoView(true);
+}
+
 var picIndex = 0;
 
 function nextPic(n) {
