@@ -9,10 +9,14 @@
   <style>
     body {
       background-image: url('bkgrd.jpeg');
+      background-size: 100% auto;
     }
   </style>
   <body>
     <div style=""></div>
+    <script>window.onload=function(){
+        nextPic(0);
+      }</script>
     <div id="content">
       <h1>Claire's Portfolio</h1>
       <button class="button" onclick="scrollMe()">About Me</button>
@@ -58,7 +62,6 @@
 
     <div id="favs" class="box">
       <h2>Favorites</h2>
-      <p>These are a few of my favorite things.</p>
       <ul>
         <li>Color: green</li>
         <li>Book: The Mysterious Benedict Society</li>
@@ -80,9 +83,11 @@
       </ul>
     </div>
 
-    <div id="gallery" class="box">
-      <h2>Gallery</h2>
-      <p>A peek into my life!</p>
+    <div id="gallery" class="box" style="text-align: center;">
+      <h2 style="text-align: left;">Gallery</h2>
+        <button class="gallery-button" onclick="nextPic(-1);" style="text-align: center;">Previous</button>
+        <div id="gallery-img-container" style="text-align: center;"></div>
+        <button class="gallery-button" onclick="nextPic(1);" style="text-align: center;">Next</button>
     </div>
   </body>
 </html>

@@ -49,14 +49,19 @@ function scrollGallery() {
 
 var picIndex = 0;
 
-function displayPic() {
-  const imgUrl = 'images/gallery-' + picIndex%10 + '.jpg';
+function nextPic(n) {
+  if (picIndex - n < 0) {
+      picIndex = 9;
+  } else {
+    picIndex += n;
+  }
+  console.log(picIndex%6);
+  const imgUrl = 'images/gallery-' + picIndex%6 + '.jpeg';
   const imgElement = document.createElement('img');
   imgElement.src = imgUrl;
 
   const imageContainer = document.getElementById('gallery-img-container');
-  // Remove the previous image.
+
   imageContainer.innerHTML = '';
   imageContainer.appendChild(imgElement);
-  picIndex++;
 }
