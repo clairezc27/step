@@ -2,17 +2,99 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Claire's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+  </style>
+  <body id="body">
+    <div style=""></div>
+    <script>window.onload=function(){
+        nextPic(0);
+      }</script>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
+      <h1 id="title">Claire's Portfolio</h1>
+      <button class="button" onclick="scrollMe();">About Me</button>
+      <button class="button" onclick="scrollCat();">My Cat</button>
+      <button class="button" onclick="scrollFavs();">Favorites</button>
+      <button class="button" onclick="scrollGallery();">Gallery</button>
       <div id="greeting-container"></div>
+
     </div>
+    <div id="me" class="box">
+      <h2>About Me</h2>
+      <div style="display: flex;">
+        <img style="vertical-align:middle; padding-right: 20px;"src="images/profile.jpg"/>
+        <span>Hi! My name is Claire, and I'm a rising junior majoring in computer science Georgia Tech. I'm currently a STEP intern, and working from Maryland.
+          I was first introduced to computer science my freshmen year of high school. Since then, I have developed my passion for computing through internships, hackathons, and technology clubs.
+          My first internship was at the National Institute of Health to conduct bioinformatics research. 
+          I was very thankful to work there, but quickly realized that I was terrible at the biology part of bioinformatics.
+          Last summer, I interned at State Farm as a front end software development intern, where I gained experience with Angular, HTML/CSS/Javascript, and ping pong.
+          In my free time, I like to paint, play tennis, and hike. 
+          <br> <!--
+          <br>I'd love to become friends; here is my social media!
+          <br><a href="https://www.linkedin.com/in/clairechen27/">LinkedIn</a>
+          <br><a href="https://www.github.com/clairezc27/">GitHub</a>
+          <br><a href="https://www.instagram.com/claire.z.c/">Instagram</a>
+          <br><a href="https://www.facebook.com/clairezc27">Facebook</a></span>-->
+      </div>
+    </div>
+
+    <div id="cat" class="box">
+      <h2>My Cat</h2> 
+      <div style="display: flex;">
+        <img style="vertical-align:middle; padding-right: 20px;"src="images/chia.jpeg"/>
+
+        <span>This is my WFH colleague, Chia. 
+        I adopted her last December, and now she follows me on my adventures, ranging from spring semester at Georgia Tech, to interning now.
+        She is currently 9 months and growing bigger everyday! Some of Chia's hobbies include: napping, chasing toy mice, and staring longingly at squirrels from the window. 
+        Chia is excited to be on board my intern experience; this is her first internship.
+        She first became interested in coding when she ran across my keyboard a few months ago. Unfortunately, the lines of code she typed did not compile.
+        Since then, Chia has been brushing up on her coding skills by pair programming with me. She does not give much input, though. 
+        However, she is looking forward to learning a lot this summer, and maybe one day will be able to compile her code!</span>
+      </div>
+     
+    </div>
+
+    <div id="favs" class="box">
+      <h2>Favorites</h2>
+      <ul>
+        <li>Color: green</li>
+        <li>Book: The Mysterious Benedict Society</li>
+        <li>TV Show: Silicon Valley</li>
+        <li>Movie: The Incredibles</li>
+        <li>Avenger: Spiderman</li>
+        <li>Food(how can I just choose one?): 
+          <ul>
+            <li>Meal: tacos</li>
+            <li>Fruit: strawberry</li>
+            <li>Vegetable: cucumber</li>
+            <li>Dessert: ice cream</li>
+          </ul>
+        </li>
+        <li>Music Genre: alternative</li>
+        <li>Song: Color Green, by New Politics (did I mention that my favorite color is green?)</li>
+        <li>Animal: elephant (sorry, Chia)</li>
+        <li>Holiday: Halloween</li>
+      </ul>
+    </div>
+
+    <div id="gallery" class="box" style="text-align: center;">
+      <h2 style="text-align: left;">Gallery</h2>
+        <button class="gallery-button" onclick="nextPic(-1);" style="text-align: center;">Previous</button>
+        <div id="gallery-img-container" style="text-align: center;"></div>
+        <button class="gallery-button" onclick="nextPic(1);" style="text-align: center;">Next</button>
+    </div>
+
+    <div id="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com 
+          &emsp; <a href="https://www.linkedin.com/in/clairechen27/">LinkedIn</a>
+          &emsp; <a href="https://www.github.com/clairezc27/">GitHub</a>
+          &emsp; <a href="https://www.instagram.com/claire.z.c/">Instagram</a>
+          &emsp; <a href="https://www.facebook.com/clairezc27">Facebook</a></div>
   </body>
 </html>

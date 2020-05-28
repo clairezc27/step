@@ -26,3 +26,49 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function scrollMe() {
+  var me = document.getElementById('me');
+  me.scrollIntoView(true);
+}
+
+function scrollCat() {
+  var cat = document.getElementById('cat');
+  cat.scrollIntoView(true);
+}
+
+function scrollFavs() {
+  var favs = document.getElementById('favs');
+  favs.scrollIntoView(true);
+}
+
+function scrollGallery() {
+  var gallery = document.getElementById('gallery');
+  gallery.scrollIntoView(true);
+}
+
+function scroll(id) {
+  console.log("scroll to: " + id);
+  var item = document.getElementById(id);
+  console.log(item);
+  item.scrollIntoView(true);
+}
+
+var picIndex = 0;
+
+function nextPic(n) {
+  if (n < 0 && picIndex + n < 0) {
+      picIndex = 5;
+  } else {
+    picIndex += n;
+  }
+  console.log(picIndex%6);
+  const imgUrl = 'images/gallery-' + picIndex%6 + '.jpeg';
+  const imgElement = document.createElement('img');
+  imgElement.src = imgUrl;
+
+  const imageContainer = document.getElementById('gallery-img-container');
+
+  imageContainer.innerHTML = '';
+  imageContainer.appendChild(imgElement);
+}
