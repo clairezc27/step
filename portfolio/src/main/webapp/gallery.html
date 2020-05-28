@@ -11,6 +11,22 @@
     <script>window.onload=function(){
         nextPic(0);
       }</script>
+
+     <div class ="header">
+      <div class="title" style="text-align:left">Claire Chen</div>
+      <div class ="menu-list">
+        <div class="dropdown">
+          <div class="dropdown-btn">Home</div>
+          <div class="dropdown-content">
+            <a class="button" href="index.html" onclick="scrollMe();">About Me</a>
+            <a class="button" href="index.html" onclick="scrollCat();">My Cat</a>
+            <a class="button" href="index.html" onclick="scrollFavs();">Favorites</a>
+          </div>
+        </div>
+        <a class ="menu-item" href="gallery.html">Gallery</a>
+      </div>
+    </div>
+
     <div id="gallery" class="box" style="text-align: center;">
       <h2 style="text-align: left;">Gallery</h2>
         <button class="gallery-button" onclick="nextPic(-1);" style="text-align: center;">Previous</button>

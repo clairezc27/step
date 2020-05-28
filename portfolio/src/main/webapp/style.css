@@ -20,6 +20,7 @@
   margin-right: 0;
   padding: 0;
 }
+
 .menu-item {
   background-color: mediumaquamarine;
   color: white;
@@ -28,6 +29,7 @@
   text-decoration: none;
   padding: 1rem 2rem;
 }
+
 .dropdown {
   position: relative;
   display:inline-block;
@@ -37,8 +39,8 @@
   background-color: mediumaquamarine;
   color:white;
   padding: 1rem 2rem;
+  border: none;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -84,6 +86,7 @@
     display: inline-block;
     font-size: 18px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .gallery-button {
