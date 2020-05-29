@@ -60,7 +60,7 @@
   font-size: 350%;
 }
 
-#body {
+.body {
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -111,7 +111,7 @@
     padding-right: 3%;
 }
 
-#footer {
+.footer {
   position: relative;
   left: 0;
   bottom: 0;
