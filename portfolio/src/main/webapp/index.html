@@ -2,9 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Claire's Portfolio</title>
+    <title>Claire Chen</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/1f5d41c44b.js" crossorigin="anonymous"></script>
   </head>
   <style>
     html {
@@ -12,20 +13,27 @@
     }
 
   </style>
-  <body id="body">
-    <div style=""></div>
+  <body class="body">
     <script>window.onload=function(){
         nextPic(0);
       }</script>
-    <div id="content">
-      <h1 id="title">Claire's Portfolio</h1>
-      <button class="button" onclick="scrollMe();">About Me</button>
-      <button class="button" onclick="scrollCat();">My Cat</button>
-      <button class="button" onclick="scrollFavs();">Favorites</button>
-      <button class="button" onclick="scrollGallery();">Gallery</button>
-      <div id="greeting-container"></div>
 
+    <div class ="header">
+      <div class="title" style="text-align:left">Claire Chen</div>
+      <div class ="menu-list">
+        <div class="dropdown">
+          <div class="dropdown-btn">Home</div>
+          <div class="dropdown-content">
+            <a class="button" onclick="scrollMe();">About Me</a>
+            <a class="button" onclick="scrollCat();">My Cat</a>
+            <a class="button" onclick="scrollFavs();">Favorites</a>
+          </div>
+        </div>
+        <a class ="menu-item" href="bucketlist.html">Bucket List</a>
+        <a class ="menu-item" href="gallery.html">Gallery</a>
+      </div>
     </div>
+
     <div id="me" class="box">
       <h2>About Me</h2>
       <div style="display: flex;">
@@ -35,13 +43,7 @@
           My first internship was at the National Institute of Health to conduct bioinformatics research. 
           I was very thankful to work there, but quickly realized that I was terrible at the biology part of bioinformatics.
           Last summer, I interned at State Farm as a front end software development intern, where I gained experience with Angular, HTML/CSS/Javascript, and ping pong.
-          In my free time, I like to paint, play tennis, and hike. 
-          <br> <!--
-          <br>I'd love to become friends; here is my social media!
-          <br><a href="https://www.linkedin.com/in/clairechen27/">LinkedIn</a>
-          <br><a href="https://www.github.com/clairezc27/">GitHub</a>
-          <br><a href="https://www.instagram.com/claire.z.c/">Instagram</a>
-          <br><a href="https://www.facebook.com/clairezc27">Facebook</a></span>-->
+          In my free time, I like to paint, play tennis, and hike. </span>
       </div>
     </div>
 
@@ -84,17 +86,10 @@
       </ul>
     </div>
 
-    <div id="gallery" class="box" style="text-align: center;">
-      <h2 style="text-align: left;">Gallery</h2>
-        <button class="gallery-button" onclick="nextPic(-1);" style="text-align: center;">Previous</button>
-        <div id="gallery-img-container" style="text-align: center;"></div>
-        <button class="gallery-button" onclick="nextPic(1);" style="text-align: center;">Next</button>
-    </div>
-
-    <div id="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com 
-          &emsp; <a href="https://www.linkedin.com/in/clairechen27/">LinkedIn</a>
-          &emsp; <a href="https://www.github.com/clairezc27/">GitHub</a>
-          &emsp; <a href="https://www.instagram.com/claire.z.c/">Instagram</a>
-          &emsp; <a href="https://www.facebook.com/clairezc27">Facebook</a></div>
+    <div class="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com 
+          &emsp; <a class="fab fa-linkedin fa-lg" style="text-decoration: none; color: white;" href="https://www.linkedin.com/in/clairechen27/"></a>
+          &emsp; <a class="fab fa-github fa-lg" style="text-decoration: none; color: white;" href="https://www.github.com/clairezc27/"></a>
+          &emsp; <a class="fab fa-instagram fa-lg" style="text-decoration: none; color: white;" href="https://www.instagram.com/claire.z.c/"></a>
+          &emsp; <a class="fab fa-facebook fa-lg" style="text-decoration: none; color: white;" href="https://www.facebook.com/clairezc27"></a></div>
   </body>
 </html>
