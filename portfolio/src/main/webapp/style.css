@@ -17,7 +17,7 @@
 .menu-list {
   display: flex;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 10%;
   padding: 0;
 }
 
@@ -45,7 +45,7 @@
   display: none;
   position: absolute;
   background-color: mediumaquamarine;
-  width: 10%;
+  width: 9%;
   z-index: 1;
 }
 
