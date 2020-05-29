@@ -51,12 +51,11 @@ var picIndex = 0;
 
 function nextPic(n) {
   if (n < 0 && picIndex + n < 0) {
-      picIndex = 5;
+      picIndex = 8;
   } else {
     picIndex += n;
   }
-  console.log(picIndex%6);
-  const imgUrl = 'images/gallery-' + picIndex%6 + '.jpeg';
+  const imgUrl = 'images/gallery-' + picIndex%9 + '.jpeg';
   const imgElement = document.createElement('img');
   imgElement.src = imgUrl;
 
