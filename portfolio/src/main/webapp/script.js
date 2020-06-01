@@ -64,3 +64,9 @@ function nextPic(n) {
   imageContainer.innerHTML = '';
   imageContainer.appendChild(imgElement);
 }
+
+async function getData() {
+  const response = await fetch('/data');
+  const data = await response.text();
+  document.getElementById('data-container').innerText = data;
+}
