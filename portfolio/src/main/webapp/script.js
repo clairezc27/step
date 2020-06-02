@@ -68,8 +68,5 @@ function nextPic(n) {
 async function getData() {
   const response = await fetch('/data');
   const data = await response.text();
-  console.log("Data: " + data);
-  const mycomment = document.getElementById('mycomment');
-  mycomment.innerText = "INNER TEXT";
-  document.getElementById('data-container').innerText = data;
+  document.getElementById('mycomment').innerText = data;
 }
