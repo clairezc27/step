@@ -28,8 +28,15 @@ import java.util.ArrayList;
 public class DataServlet extends HttpServlet {
   
   private ArrayList<String> history = new ArrayList();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("application/json");
+    response.getWriter().println(history);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
     String json = convertToJson(new Comment(name, comment));
@@ -37,7 +44,7 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(history);
 
-    //response.sendRedirect("/comments.html");
+    response.sendRedirect("/comments.html");
   }
 
   private String convertToJson(Comment c) {
