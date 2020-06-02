@@ -25,15 +25,12 @@ import java.util.ArrayList;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+  private ArrayList<String> comments = new ArrayList<>();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> list = new ArrayList<String>();
-    list.add("apple");
-    list.add("book");
-    list.add("car");
-    String s = new Gson().toJson(list);
-    response.setContentType("text/html;");
-    response.getWriter().println(s);
+    String name = request.getParameter("name");
+    String comment = request.getParameter("comment");
+    response.getWriter().println(name + ": " + comment);
+    //response.sendRedirect("/comments.html");
   }
 }

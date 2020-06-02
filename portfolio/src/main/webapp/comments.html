@@ -9,7 +9,7 @@
 	<script src="https://kit.fontawesome.com/1f5d41c44b.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="body">
+<body class="body" onload="getData()">
 
 	<div class="header">
 		<div class="title" style="text-align:left">Claire Chen</div>
@@ -28,15 +28,17 @@
 		</div>
 	</div>
 
-	<div class="box" style="text-align: center;" style="font-size: 1.4em">
+	<div class="box">
 		<h2 class="title" style="text-align: left; font-size: 2em;">Comments Form</h2>
-    <form action="/data" method="POST">
-    <p>Name</p>
-      <input type="text" style="40vw"><br>
+    <form action="/data" id="commentform" method="GET" style="font-size: 1.4em">
+      <p>Name</p>
+      <input type="text" style="40vw" name="name"><br>
       <p>Comment</p>
-      <textarea style="width:60vw; height: 30vh;"></textarea><br>
+      <textarea id="commentform" style="width:60vw; height: 30vh;" name="comment"></textarea><br>
       <input type="submit" value="Submit" class="button" style="margin-top: 1%; padding-top: 1%;">
-      <div id ="data-container"></div>
+      <div id ="data-container">
+          <p id="mycomment"></p>
+      </div>
     </form>
 	</div>
 
