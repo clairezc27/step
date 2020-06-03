@@ -41,7 +41,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
-    String json = convertToJson(new Comment(name, comment));
+    String json = (new Gson()).toJson(new Comment(name, comment));
     history.add(json);
     response.setContentType("text/html");
     response.getWriter().println(name + " just commented.");
@@ -49,9 +49,4 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/comments.html");
   }
 
-  private String convertToJson(Comment c) {
-    Gson gson = new Gson();
-    String json = gson.toJson(c);
-    return json;
-  }
 }

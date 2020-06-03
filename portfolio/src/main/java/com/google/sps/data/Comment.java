@@ -4,9 +4,9 @@ public class Comment {
   private String name;
   private String text;
 
-  public Comment(String n, String t) {
-    this.name = n;
-    this.text = t;
+  public Comment(String requestName, String requestText) {
+    this.name = requestName;
+    this.text = requestText;
   }
 
   public String getName() {
