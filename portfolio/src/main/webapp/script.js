@@ -66,20 +66,17 @@ function nextPic(n) {
 }
 
 function getData() {
-  fetch('/data').then(response => response.json()).then((history) => {
-    
-    if (history != null && history.comments != null) {
+  fetch('/data').then(response => response.json()).then((tasks) => {
     const historyEl = document.getElementById('history');
-    history.comments.forEach((line) => {
+    tasks.forEach((line) => {
       historyEl.appendChild(createListElement(line));
-    });}
+    });
   });
 }
 
 function createListElement(str) {
   const liElement = document.createElement('li');
-  liElement.setAttribute('class', 'comment-item');
-  var newStr = JSON.parse(str);
-  liElement.innerHTML = newStr.name + ": " + newStr.text;
+  liElement.className = 'comment-item';
+  liElement.innerText = str.name + ": " + str.text;
   return liElement;
 }
