@@ -30,16 +30,17 @@
 
 	<div class="box">
 		<h2 class="title" style="text-align: left; font-size: 2em;">Comments Form</h2>
-    <form action="/data" id="commentform" method="POST" style="font-size: 1.4em">
+    <form action="/data" method="POST" style="font-size: 1.4em">
       <p>Name</p>
       <input type="text" style="40vw" name="name"><br>
       <p>Comment</p>
-      <textarea id="commentform" style="width:60vw; height: 30vh;" name="comment"></textarea><br>
+      <textarea style="width:60vw; height: 30vh;" name="comment"></textarea><br>
       <input type="submit" value="Submit" class="button" style="margin-top: 1%; padding-top: 1%;">
       <div id ="data-container">
           <p id="mycomment"></p>
       </div>
     </form>
+    <ul id="history"></ul>
 	</div>
 
 	<div class="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com

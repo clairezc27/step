@@ -1,8 +1,5 @@
 package com.google.sps.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Comment {
   private String name;
   private String text;

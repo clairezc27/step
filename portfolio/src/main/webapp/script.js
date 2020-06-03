@@ -65,8 +65,29 @@ function nextPic(n) {
   imageContainer.appendChild(imgElement);
 }
 
-async function getData() {
-  const response = await fetch('/data');
-  const data = await response.text();
-  document.getElementById('mycomment').innerText = data;
+// async function getData() {
+//   const response = await fetch('/data');
+//   const data = await response.text();
+//   document.getElementById('mycomment').innerText = data;
+// }
+
+function getData() {
+  fetch('/data').then(response => response.json()).then((history) => {
+    
+    if (history != null && history.comments != null) {
+        console.log("not null");
+    const historyEl = document.getElementById('history');
+    console.log(history.comments);
+    history.comments.forEach((line) => {
+        console.log(line);
+      historyEl.appendChild(createListElement(line));
+    });}
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }

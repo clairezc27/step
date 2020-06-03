@@ -15,6 +15,7 @@
 package com.google.sps.servlets;
 
 import com.google.sps.data.Comment;
+import com.google.sps.data.CommentList;
 import java.io.IOException;
 import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
@@ -27,12 +28,13 @@ import java.util.ArrayList;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  private ArrayList<String> history = new ArrayList();
+  private CommentList history = new CommentList();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    response.getWriter().println(history);
+    String json = new Gson().toJson(history);
+    response.getWriter().println(json);
   }
 
   @Override
@@ -41,8 +43,8 @@ public class DataServlet extends HttpServlet {
     String comment = request.getParameter("comment");
     String json = convertToJson(new Comment(name, comment));
     history.add(json);
-    response.setContentType("application/json;");
-    response.getWriter().println(history);
+    response.setContentType("text/html");
+    response.getWriter().println(name + " just commented.");
 
     response.sendRedirect("/comments.html");
   }
