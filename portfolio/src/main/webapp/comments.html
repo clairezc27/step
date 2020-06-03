@@ -9,12 +9,7 @@
 	<script src="https://kit.fontawesome.com/1f5d41c44b.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="body">
-	<script>
-		window.onload=function(){
-        nextPic(0);
-      }
-	</script>
+<body class="body" onload="getData()">
 
 	<div class="header">
 		<div class="title" style="text-align:left">Claire Chen</div>
@@ -33,11 +28,24 @@
 		</div>
 	</div>
 
-	<div id="gallery" class="box" style="text-align: center;">
-		<h2 class="title" style="font-size: 2em; text-align: left;">Gallery</h2>
-		<button class="gallery-button" onclick="nextPic(-1);" style="text-align: center;">Previous</button>
-		<div id="gallery-img-container" style="text-align: center;"></div>
-		<button class="gallery-button" onclick="nextPic(1);" style="text-align: center;">Next</button>
+	<div class="box">
+		<h2 class="title" style="text-align: left; font-size: 2em;">Comments Form</h2>
+    <form action="/data" method="POST" style="font-size: 1.4em">
+      <p>Name</p>
+      <input type="text" style="40vw" name="name"><br>
+      <p>Comment</p>
+      <textarea style="width:60vw; height: 30vh;" name="comment"></textarea><br>
+      <input type="submit" value="Submit" class="button" style="margin-top: 1%; padding-top: 1%;">
+      <div id ="data-container">
+          <p id="mycomment"></p>
+      </div>
+    </form>
+	</div>
+
+  <div class="box">
+		<h2 class="title" style="text-align: left; font-size: 2em;">Comments</h2>
+   
+    <ul id="history" class="comments"></ul>
 	</div>
 
 	<div class="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com

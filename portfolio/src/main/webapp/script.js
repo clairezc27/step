@@ -64,3 +64,22 @@ function nextPic(n) {
   imageContainer.innerHTML = '';
   imageContainer.appendChild(imgElement);
 }
+
+function getData() {
+  fetch('/data').then(response => response.json()).then((history) => {
+    
+    if (history != null && history.comments != null) {
+    const historyEl = document.getElementById('history');
+    history.comments.forEach((line) => {
+      historyEl.appendChild(createListElement(line));
+    });}
+  });
+}
+
+function createListElement(str) {
+  const liElement = document.createElement('li');
+  liElement.setAttribute('class', 'comment-item');
+  var newStr = JSON.parse(str);
+  liElement.innerHTML = newStr.name + ": " + newStr.text;
+  return liElement;
+}
