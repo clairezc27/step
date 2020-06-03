@@ -111,6 +111,15 @@
     padding-right: 3%;
 }
 
+ul.comments {
+    font-size: 1.4em; 
+    list-style-type: none; 
+}
+
+li.comment-item {
+    margin-bottom: 10px;
+}
+
 .footer {
   position: relative;
   left: 0;
