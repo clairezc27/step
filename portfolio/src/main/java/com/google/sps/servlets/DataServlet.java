@@ -14,8 +14,6 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.Comment;
-import com.google.sps.data.CommentList;
 import com.google.sps.data.Task;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -36,23 +34,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  private CommentList history = new CommentList();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    Query query = new Query("Task");
+    Query query = new Query("Task").addSort("timestamp", SortDirection.ASCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    System.err.println("done creating query");
+
     List<Task> tasks = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
       String comment = (String) entity.getProperty("text");
+      long timestamp = (long) entity.getProperty("timestamp");
 
-      Task task = new Task(id, name, comment);
+      Task task = new Task(id, name, comment, timestamp);
       tasks.add(task);
     }
     
@@ -68,6 +65,7 @@ public class DataServlet extends HttpServlet {
     Entity taskEntity = new Entity("Task");
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("text", comment);
+    taskEntity.setProperty("timestamp", System.currentTimeMillis());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
