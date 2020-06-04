@@ -77,6 +77,24 @@ function getData() {
 function createListElement(str) {
   const liElement = document.createElement('li');
   liElement.className = 'comment-item';
-  liElement.innerText = str.name + ": " + str.text;
+
+  const commentElement = document.createElement('comment');
+  commentElement.innerText = str.name + ": " + str.text;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteTask(str);
+    liElement.remove();
+  });
+
+  liElement.appendChild(commentElement);
+  liElement.appendChild(deleteButtonElement); 
   return liElement;
+}
+
+function deleteTask(task) {
+  const params = new URLSearchParams();
+  params.append('id', task.id);
+  fetch('/delete-task', {method: 'POST', body: params});
 }
