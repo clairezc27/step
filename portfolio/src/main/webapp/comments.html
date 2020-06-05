@@ -30,21 +30,27 @@
 
 	<div class="box">
 		<h2 class="title" style="text-align: left; font-size: 2em;">Comments Form</h2>
-    <form action="/data" method="POST" style="font-size: 1.4em">
+    <form action="/new-comment" method="POST" style="font-size: 1.4em">
       <p>Name</p>
-      <input type="text" style="40vw" name="name"><br>
+      <input type="text" style="line-height: 20px" name="name" placeholder="Enter name"><br>
       <p>Comment</p>
-      <textarea style="width:60vw; height: 30vh;" name="comment"></textarea><br>
+      <textarea style="width:60vw; height: 25vh;" name="comment" placeholder="Enter comment"></textarea><br>
       <input type="submit" value="Submit" class="button" style="margin-top: 1%; padding-top: 1%;">
-      <div id ="data-container">
-          <p id="mycomment"></p>
-      </div>
     </form>
 	</div>
 
   <div class="box">
 		<h2 class="title" style="text-align: left; font-size: 2em;">Comments</h2>
-   
+    <form action="/data" method="GET" style="font-size: 1.4em">
+      <label for="num-comments">Display Max Comments:</label>
+        <select name="max-input" id="num-comments" onchange="updateComments()">
+            <option disabled selected value>select</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+    </form>
+    <button class="button" style="margin-top: 1%; padding-top: 1%;" onclick="deleteComments()">Delete Comments</button>
     <ul id="history" class="comments"></ul>
 	</div>
 
