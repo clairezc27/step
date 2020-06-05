@@ -77,10 +77,13 @@ function getData() {
 function createListElement(str) {
   const liElement = document.createElement('li');
   liElement.className = 'comment-item';
-
+  const dateElement = document.createElement('date');
+  dateElement.innerText = str.date;
   const commentElement = document.createElement('comment');
   commentElement.innerText = str.name + ": " + str.text;
 
+  liElement.appendChild(dateElement);
+  liElement.appendChild(document.createElement("br"));
   liElement.appendChild(commentElement);
   return liElement;
 }

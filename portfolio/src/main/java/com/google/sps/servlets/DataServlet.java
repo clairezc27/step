@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,8 +50,8 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String comment = (String) entity.getProperty("text");
       long timestamp = (long) entity.getProperty("timestamp");
-
-      Task task = new Task(id, name, comment, timestamp);
+      Date date = (Date) entity.getProperty("date");
+      Task task = new Task(id, name, comment, timestamp, date);
       tasks.add(task);
     }
     
