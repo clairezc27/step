@@ -81,14 +81,7 @@ function createListElement(str) {
   const commentElement = document.createElement('comment');
   commentElement.innerText = str.name + ": " + str.text;
 
-//   const deleteButtonElement = document.getElementById('delete-button');
-//   deleteButtonElement.addEventListener('click', () => {
-//     deleteTask(str);
-//     liElement.remove();
-//   });
-
   liElement.appendChild(commentElement);
-  //liElement.appendChild(deleteButtonElement); 
   return liElement;
 }
 
@@ -97,7 +90,6 @@ function updateComments() {
     let numComments = document.getElementById('num-comments').value;
     const historyEl = document.getElementById('history');
     historyEl.innerHTML = "";
-    historyEl
     let displayNum = Math.min(numComments, tasks.length);
     for (let i = 0; i < displayNum; i++) {
         historyEl.appendChild(createListElement(tasks[i]));
@@ -105,8 +97,15 @@ function updateComments() {
   });
 }
 
-function deleteTask(task) {
-  const params = new URLSearchParams();
-  params.append('id', task.id);
-  fetch('/delete-task', {method: 'POST', body: params});
+function deleteComments() {
+  fetch('/data').then(response => response.json()).then((tasks) => {
+    const historyEl = document.getElementById('history');
+    historyEl.innerHTML = "";
+  
+    tasks.forEach((line) => {
+      const params = new URLSearchParams();
+      params.append('id', line.id);
+      fetch('/delete-task', {method: 'POST', body: params});
+    });
+  });
 }

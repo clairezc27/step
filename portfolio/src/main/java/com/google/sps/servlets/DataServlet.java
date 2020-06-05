@@ -43,6 +43,7 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     List<Task> tasks = new ArrayList<>();
+    request.setAttribute("task-list", tasks);
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");

@@ -13,4 +13,5 @@ public final class Task {
     this.text = textInput;
     this.timestamp = timestampInput;
   }
+
 }
