@@ -94,6 +94,7 @@ function updateComments() {
     const historyEl = document.getElementById('history');
     historyEl.innerHTML = "";
     let displayNum = Math.min(numComments, tasks.length);
+    
     for (let i = 0; i < displayNum; i++) {
         historyEl.appendChild(createListElement(tasks[i]));
     }
