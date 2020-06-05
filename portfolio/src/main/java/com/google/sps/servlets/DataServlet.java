@@ -43,14 +43,6 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     List<Task> tasks = new ArrayList<>();
-    //String commentsStr = request.getParameter("max-input");
-    // int maxComments;
-    // if (commentsStr == null) {
-    //     maxComments = tasks.size();
-    // } else {
-    //     maxComments = Integer.parseInt(commentsStr);
-    // }
-
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
@@ -60,10 +52,6 @@ public class DataServlet extends HttpServlet {
       Task task = new Task(id, name, comment, timestamp);
       tasks.add(task);
     }
-
-    // if (maxComments < tasks.size()) {
-    //   tasks = tasks.subList(tasks.size()-maxComments, tasks.size());
-    // }
     
     response.setContentType("application/json;");
     response.getWriter().println((new Gson()).toJson(tasks));

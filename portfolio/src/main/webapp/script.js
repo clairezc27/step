@@ -93,7 +93,6 @@ function createListElement(str) {
 }
 
 function updateComments() {
-    console.log('updatecomments() called');
   fetch('/data').then(response => response.json()).then((tasks) => {
     let numComments = document.getElementById('num-comments').value;
     const historyEl = document.getElementById('history');
