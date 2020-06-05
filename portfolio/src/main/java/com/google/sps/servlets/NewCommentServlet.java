@@ -31,42 +31,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-  
+@WebServlet("/new-comment")
+public class NewCommentServlet extends HttpServlet {
+
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    Query query = new Query("Task").addSort("timestamp", SortDirection.ASCENDING);
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = request.getParameter("name");
+    String comment = request.getParameter("comment");
+
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("name", name);
+    taskEntity.setProperty("text", comment);
+    taskEntity.setProperty("timestamp", System.currentTimeMillis());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    datastore.put(taskEntity);
 
-    List<Task> tasks = new ArrayList<>();
-    //String commentsStr = request.getParameter("max-input");
-    // int maxComments;
-    // if (commentsStr == null) {
-    //     maxComments = tasks.size();
-    // } else {
-    //     maxComments = Integer.parseInt(commentsStr);
-    // }
-
-    for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      String comment = (String) entity.getProperty("text");
-      long timestamp = (long) entity.getProperty("timestamp");
-
-      Task task = new Task(id, name, comment, timestamp);
-      tasks.add(task);
-    }
-
-    // if (maxComments < tasks.size()) {
-    //   tasks = tasks.subList(tasks.size()-maxComments, tasks.size());
-    // }
-    
-    response.setContentType("application/json;");
-    response.getWriter().println((new Gson()).toJson(tasks));
+    response.sendRedirect("/comments.html");
   }
 
 }

@@ -81,16 +81,29 @@ function createListElement(str) {
   const commentElement = document.createElement('comment');
   commentElement.innerText = str.name + ": " + str.text;
 
-  const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.addEventListener('click', () => {
-    deleteTask(str);
-    liElement.remove();
-  });
+//   const deleteButtonElement = document.getElementById('delete-button');
+//   deleteButtonElement.addEventListener('click', () => {
+//     deleteTask(str);
+//     liElement.remove();
+//   });
 
   liElement.appendChild(commentElement);
-  liElement.appendChild(deleteButtonElement); 
+  //liElement.appendChild(deleteButtonElement); 
   return liElement;
+}
+
+function updateComments() {
+    console.log('updatecomments() called');
+  fetch('/data').then(response => response.json()).then((tasks) => {
+    let numComments = document.getElementById('num-comments').value;
+    const historyEl = document.getElementById('history');
+    historyEl.innerHTML = "";
+    historyEl
+    let displayNum = Math.min(numComments, tasks.length);
+    for (let i = 0; i < displayNum; i++) {
+        historyEl.appendChild(createListElement(tasks[i]));
+    }
+  });
 }
 
 function deleteTask(task) {
