@@ -65,6 +65,25 @@ function nextPic(n) {
   imageContainer.appendChild(imgElement);
 }
 
+function loadPage() {
+  showForm();
+  getData();
+}
+
+function showForm() {
+  fetch('/login').then(response => response.text()).then((loggedIn) => {
+    console.log(loggedIn);
+    if (loggedIn == 0) {
+      console.log("inside if");
+      document.getElementById('comment-form').innerHTML = "";
+      var loginButton = document.createElement('login');
+      loginButton.className = 'button';
+      loginButton.innerHTML = "Login";
+      document.getElementById('comment-form').appendChild(loginButton);
+    }
+  });
+}
+
 function getData() {
   fetch('/data').then(response => response.json()).then((tasks) => {
     const historyEl = document.getElementById('history');
