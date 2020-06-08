@@ -132,3 +132,10 @@ li.comment-item {
   padding-bottom: 1%;
   margin-top: 1%;
 }
+
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+}
+

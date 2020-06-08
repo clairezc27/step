@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<meta charset="UTF-8">
-	<title>Claire Chen</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
-	<script src="https://kit.fontawesome.com/1f5d41c44b.js" crossorigin="anonymous"></script>
+  <title>Claire Chen</title>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8oEkALyztn5ML9r_h3y10t4pqMfKUvT8&callback=initMap"
+  type="text/javascript"></script>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body onload="createMap();">
 
-<body class="body">
-	<script>
-		window.onload=function(){
-        nextPic(0);
-      }
-	</script>
+  <div class ="header">
+  <div class="title" style="text-align:left">Claire Chen</div>
+  <div class ="menu-list">
+    <div class="dropdown">
+      <div class="dropdown-btn">Home</div>
+      <div class="dropdown-content">
+        <a class="button" href="index.html#about">About Me</a>
+        <a class="button" href="index.html#cat">My Cat</a>
+        <a class="button" href="index.html#favs">Favorites</a>
+      </div>
+    </div>
+    <a class ="menu-item" href="bucketlist.html">Bucket List</a>
+    <a class ="menu-item" href="gallery.html">Gallery</a>
+    <a class ="menu-item" href="comments.html">Comments</a>
+    <a class ="menu-item" href="map.html">Map</a>
+    </div>
+  </div>
 
-	<div class="header">
-		<div class="title" style="text-align:left">Claire Chen</div>
-		<div class="menu-list">
-			<div class="dropdown">
-				<div class="dropdown-btn">Home</div>
-				<div class="dropdown-content">
-					<a class="button" href="index.html#about">About Me</a>
-					<a class="button" href="index.html#cat">My Cat</a>
-					<a class="button" href="index.html#favs">Favorites</a>
-				</div>
-			</div>
-			<a class="menu-item" href="bucketlist.html">Bucket List</a>
-			<a class="menu-item" href="gallery.html">Gallery</a>
-      <a class ="menu-item" href="comments.html">Comments</a>
-      <a class ="menu-item" href="map.html">Map</a>
-		</div>
-	</div>
-
-	<div id="gallery" class="box" style="text-align: center;">
+  <div id="gallery" class="box" style="text-align: center;">
 		<h2 class="title" style="font-size: 2em; text-align: left;">Map</h2>
+    <div id="map"></div>
 	</div>
 
 	<div class="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com
@@ -48,5 +42,4 @@
 		&emsp; <a class="fab fa-facebook fa-lg" style="text-decoration: none; color: white;"
 			href="https://www.facebook.com/clairezc27"></a></div>
 </body>
-
 </html>
