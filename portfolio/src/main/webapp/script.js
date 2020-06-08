@@ -114,8 +114,54 @@ function deleteComments() {
   });
 }
 
-function createMap() {
+function initMap() {
   const map = new google.maps.Map(
       document.getElementById('map'),
       {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+  setMarkers(map);
+}
+
+function setMarkers(map) {
+
+  const catoctinMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 39.6015023, lng: -77.4501050},
+    map: map,
+    title: 'Cunningham Falls State Park'
+    });
+
+  const stoneMountainMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 33.8065112, lng: -84.1448021},
+    map: map,
+    title: 'Stone Mountain'
+    });
+
+  const billyGoatMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 38.9832703, lng: -77.2346588},
+    map: map,
+    title: 'Billy Goat Trail'
+    });
+
+  const scottsRunMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 38.9619118, lng: -77.1967676},
+    map: map,
+    title: "Scott's Run"
+    });
+
+  const patapscoMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 39.2957353, lng: -76.7852953},
+    map: map,
+    title: 'Patapsco State Park'
+    });
+
+  const chattahoocheeMark = new google.maps.Marker({
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    position: {lat: 34.0141701, lng: -84.3504380},
+    map: map,
+    title: "Chattahoochee River"
+    });
 }
