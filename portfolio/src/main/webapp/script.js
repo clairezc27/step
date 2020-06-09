@@ -71,15 +71,19 @@ function loadPage() {
 }
 
 function showForm() {
-  fetch('/login').then(response => response.text()).then((loggedIn) => {
+  fetch('/login-status').then(response => response.text()).then((loggedIn) => {
     console.log(loggedIn);
     if (loggedIn == 0) {
       console.log("inside if");
       document.getElementById('comment-form').innerHTML = "";
-      var loginButton = document.createElement('login');
+      var loginButton = document.createElement('button');
       loginButton.className = 'button';
       loginButton.innerHTML = "Login";
+      loginButton.formAction = "/login";
+      loginButton.method = "GET";
+      loginButton.setAttribute("id", "login-btn");
       document.getElementById('comment-form').appendChild(loginButton);
+      document.getElementById('login-btn').addEventListener("click", login);
     }
   });
 }

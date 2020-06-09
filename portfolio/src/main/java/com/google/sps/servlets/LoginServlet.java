@@ -1,3 +1,5 @@
+// Copyright 2019 Google LLC
+
 package com.google.sps.servlets;
 
 import com.google.appengine.api.users.UserService;
@@ -7,27 +9,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URL; 
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
+      String urlToRedirectToAfterUserLogsOut = "/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      response.setContentType("text/html;");
-      response.getWriter().println(1);
+      response.sendRedirect(logoutUrl);
     } else {
-      response.setContentType("text/html;");
-      response.getWriter().println(0);
+      String urlToRedirectToAfterUserLogsIn = "/comments.html";
+      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+      
+      URL url = new URL(request.getRequestURL().toString());
+      response.sendRedirect(loginUrl);
+      return;
     }
   }
-
 }

@@ -8,6 +8,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,16 +26,24 @@ public class NewCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+
+    if (!userService.isUserLoggedIn()) {
+      response.sendRedirect("/comments.html");
+      return;
+    }
 
     Date day = new Date();
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
+    String email = userService.getCurrentUser().getEmail();
 
     Entity taskEntity = new Entity("Task");
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("text", comment);
     taskEntity.setProperty("timestamp", System.currentTimeMillis());
     taskEntity.setProperty("date", day);
+    taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
