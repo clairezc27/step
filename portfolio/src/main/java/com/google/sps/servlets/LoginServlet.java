@@ -1,4 +1,3 @@
-// Copyright 2019 Google LLC
 
 package com.google.sps.servlets;
 

@@ -72,23 +72,21 @@ function loadPage() {
 
 function showForm() {
   fetch('/login-status').then(response => response.text()).then((loggedIn) => {
+    
+    var loginButton = document.createElement('button');
+    loginButton.className = 'button';
+    loginButton.innerHTML = "Login";
+    loginButton.formAction = "/login";
+    loginButton.method = "GET";
+
     if (loggedIn == 0) {
       document.getElementById('comment-form').innerHTML = "";
-      var loginButton = document.createElement('button');
-      loginButton.className = 'button';
       loginButton.innerHTML = "Login";
-      loginButton.formAction = "/login";
-      loginButton.method = "GET";
-      document.getElementById('comment-form').appendChild(loginButton);
     } else {
-      const form = document.getElementById('comment-form');
-      var logoutButton = document.createElement('button');
-      logoutButton.className = 'button';
-      logoutButton.innerHTML = "Logout";
-      logoutButton.formAction = "/login";
-      logoutButton.method = "GET";
-      document.getElementById('comment-form').appendChild(logoutButton);
+      loginButton.innerHTML = "Logout";
     }
+
+    document.getElementById('comment-form').appendChild(loginButton);
   });
 }
 
