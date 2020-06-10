@@ -79,7 +79,7 @@ function renderForm() {
     loginButton.formAction = "/login";
     loginButton.method = "GET";
 
-    if (status.isUserLoggedIn == "false") {
+    if (!status.isUserLoggedIn) {
       document.getElementById('comment-form').innerHTML = "";
       loginButton.innerHTML = "Login";
     } else {

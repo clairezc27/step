@@ -1,5 +1,8 @@
 package com.google.sps.servlets;
 
+
+import com.google.sps.data.LoginStatus;
+import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -17,10 +20,11 @@ public class LoginStatusServlet extends HttpServlet {
     response.setContentType("application/json");
 
     UserService userService = UserServiceFactory.getUserService();
+    Gson gson = new Gson();
     if (userService.isUserLoggedIn()) {
-      response.getWriter().println("{\"isUserLoggedIn\": \"true\"}");
+      response.getWriter().println(gson.toJson(new LoginStatus(true)));
     } else {
-      response.getWriter().println("{\"isUserLoggedIn\": \"false\"}");
+      response.getWriter().println(gson.toJson(new LoginStatus(false)));
     }
   }
 
