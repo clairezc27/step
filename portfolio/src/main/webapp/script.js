@@ -66,11 +66,11 @@ function nextPic(n) {
 }
 
 function loadPage() {
-  showForm();
+  renderForm();
   getData();
 }
 
-function showForm() {
+function renderForm() {
   fetch('/login-status').then(response => response.text()).then((loggedIn) => {
     
     var loginButton = document.createElement('button');
