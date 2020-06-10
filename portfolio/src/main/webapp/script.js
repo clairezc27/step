@@ -176,6 +176,27 @@ function createMarkerForDisplay(lat, lng, content) {
     infoWindow.open(map, marker);
   });
   markerArray.push(marker);
+
+  var geocoder = new google.maps.Geocoder;
+  var latLng = new google.maps.LatLng(lat, lng);
+  geocoder.geocode({'latLng': latLng}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+        var result = results[0];
+        var state = "";
+        for (var i = 0, len = result.address_components.length; i < len; i++) {
+            var ac = result.address_components[i];
+            if (ac.types.includes("administrative_area_level_1")) {
+                state = ac.long_name;
+            }
+        }
+        console.log(state);
+        var input = document.getElementById('state');
+        input.formAction = "/chart-data";
+        input.setAttribute('value', state);
+    }
+  });
+
 }
 
 function createMarkerForEdit(lat, lng) {
@@ -218,6 +239,7 @@ function buildInfoWindowInput(lat, lng) {
 }
 
 function postMarker(lat, lng, content) {
+    console.log("inside postMarker");
   const params = new URLSearchParams();
   params.append('lat', lat);
   params.append('lng', lng);
@@ -226,11 +248,33 @@ function postMarker(lat, lng, content) {
   fetch('/markers', {method: 'POST', body: params});
 }
 
-function setMarkers(map) {
+function setMarkers() {
   createMarkerForDisplay(39.6015023,-77.4501050, "Cunningham Falls");
   createMarkerForDisplay(33.8065112, -84.1448021, "Stone Mountain");
   createMarkerForDisplay(38.9832703, -77.2346588, "Billy Goat Trail");
   createMarkerForDisplay(38.9619118, -77.1967676, "Scott's Run");
   createMarkerForDisplay(39.2957353, -76.7852953, "Patapsco State Park");
   createMarkerForDisplay(34.0141701, -84.3504380, "Chattahoochee River");
+}
+
+function drawChart() {
+  fetch('/chart-data').then(response => response.json()).then((markerData) => {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'State');
+    data.addColumn('number', 'Number of Places Hiked');
+    Object.keys(markerData).forEach((state) => {
+      data.addRow([state, markerData[state]]);
+    });
+
+    const options = {
+      'title': 'Places Hiked Per State',
+      'width':600,
+      'height':500
+    };
+
+    const chart = new google.visualization.PieChart(
+        document.getElementById('chart-container'));
+    chart.draw(data, options);
+  });
+
 }
