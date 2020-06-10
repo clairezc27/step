@@ -71,7 +71,7 @@ function loadPage() {
 }
 
 function renderForm() {
-  fetch('/login-status').then(response => response.text()).then((loggedIn) => {
+  fetch('/login-status').then(response => response.json()).then((status) => {
     
     var loginButton = document.createElement('button');
     loginButton.className = 'button';
@@ -79,7 +79,7 @@ function renderForm() {
     loginButton.formAction = "/login";
     loginButton.method = "GET";
 
-    if (loggedIn == 0) {
+    if (status.isUserLoggedIn == "false") {
       document.getElementById('comment-form').innerHTML = "";
       loginButton.innerHTML = "Login";
     } else {
