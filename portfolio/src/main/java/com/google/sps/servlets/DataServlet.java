@@ -49,7 +49,7 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String comment = (String) entity.getProperty("text");
       long timestamp = (long) entity.getProperty("timestamp");
-      Date date = (Date) entity.getProperty("date");
+      String date = (String) entity.getProperty("date");
       Task task = new Task(id, name, comment, timestamp, date);
       tasks.add(task);
     }

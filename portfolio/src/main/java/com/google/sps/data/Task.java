@@ -9,12 +9,12 @@ public final class Task {
   private final long timestamp;
   private final String date;
 
-  public Task(long idInput, String nameInput, String textInput, long timestampInput, Date dayInput) {
+  public Task(long idInput, String nameInput, String textInput, long timestampInput, String dayInput) {
     this.id = idInput;
     this.name = nameInput;
     this.text = textInput;
     this.timestamp = timestampInput;
-    this.date = dayInput.toString();
+    this.date = dayInput;
   }
 
 }

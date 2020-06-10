@@ -34,6 +34,7 @@ public class NewCommentServlet extends HttpServlet {
     }
 
     Date day = new Date();
+    String dayStr = day.toString();
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
     String email = userService.getCurrentUser().getEmail();
@@ -42,7 +43,7 @@ public class NewCommentServlet extends HttpServlet {
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("text", comment);
     taskEntity.setProperty("timestamp", System.currentTimeMillis());
-    taskEntity.setProperty("date", day);
+    taskEntity.setProperty("date", dayStr);
     taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
