@@ -141,6 +141,7 @@ function deleteComments() {
 
 let map;
 let editMarker;
+var markerArray = new Array();
 
 function initMap() {
   map = new google.maps.Map(
@@ -173,6 +174,7 @@ function createMarkerForDisplay(lat, lng, content) {
   marker.addListener('click', () => {
     infoWindow.open(map, marker);
   });
+  markerArray.push(marker);
 }
 
 function createMarkerForEdit(lat, lng) {
