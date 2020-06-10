@@ -102,13 +102,14 @@ function getData() {
 function createListElement(str) {
   const liElement = document.createElement('li');
   liElement.className = 'comment-item';
-  const dateElement = document.createElement('date');
+  const dateElement = document.createElement("p");
   dateElement.innerText = str.date;
-  const commentElement = document.createElement('comment');
+  dateElement.style.margin = '3px';
+  const commentElement = document.createElement("p");
   commentElement.innerText = str.name + ": " + str.text;
+  commentElement.style.margin = '3px';
 
   liElement.appendChild(dateElement);
-  liElement.appendChild(document.createElement("br"));
   liElement.appendChild(commentElement);
   return liElement;
 }
