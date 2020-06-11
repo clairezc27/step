@@ -178,6 +178,7 @@ li.comment-item {
 }
 
 #pac-container {
+  padding-top: 10px;
   padding-bottom: 12px;
   margin-right: 12px;
 }
