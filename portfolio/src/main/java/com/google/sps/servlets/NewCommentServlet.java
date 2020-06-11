@@ -32,7 +32,6 @@ public class NewCommentServlet extends HttpServlet {
       return;
     }
 
-    Date day = new Date();
     DateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
     String strDate = df.format(day);
     String name = request.getParameter("name");
