@@ -143,8 +143,7 @@ var markerArray = new Array();
 function initMap() {
   map = new google.maps.Map(
       document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16,
-    mapTypeId: 'roadmap'});
+      {center: {lat: 37.422, lng: -122.084}, zoom: 16, mapTypeId: 'roadmap'});
 
   map.addListener('click', (event) => {
     createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
@@ -257,13 +256,6 @@ function initAutocomplete() {
       if (!place.geometry) {
         return;
       }
-      var icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
 
       var addMarkerDiv = document.createElement('div');
       addMarkerDiv.index = 1;
