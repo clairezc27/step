@@ -182,18 +182,20 @@ function createMarkerForDisplay(lat, lng, content) {
   geocoder.geocode({'latLng': latLng}, function(results, status) {
 
     if (status == google.maps.GeocoderStatus.OK) {
-        var result = results[0];
-        var state = "";
-        for (var i = 0, len = result.address_components.length; i < len; i++) {
-            var ac = result.address_components[i];
-            if (ac.types.includes("administrative_area_level_1")) {
-                state = ac.long_name;
-            }
-        }
-        console.log(state);
-        var input = document.getElementById('state');
-        input.formAction = "/chart-data";
-        input.setAttribute('value', state);
+			var result = results[0];
+			var state = "";
+			for (var i = 0, len = result.address_components.length; i < len; i++) {
+				var ac = result.address_components[i];
+				if (ac.types.includes("administrative_area_level_1")) {
+					state = ac.long_name;
+				}
+			}
+      
+  		const chartParam = new URLSearchParams();
+			chartParam.append('state', state);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", '/chart-data', true);
+			xhr.send(chartParam);
     }
   });
 
@@ -239,7 +241,7 @@ function buildInfoWindowInput(lat, lng) {
 }
 
 function postMarker(lat, lng, content) {
-    console.log("inside postMarker");
+
   const params = new URLSearchParams();
   params.append('lat', lat);
   params.append('lng', lng);
@@ -272,7 +274,7 @@ function drawChart() {
       'height':500
     };
 
-    const chart = new google.visualization.PieChart(
+    const chart = new google.visulization.PieChart(
         document.getElementById('chart-container'));
     chart.draw(data, options);
   });
