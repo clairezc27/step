@@ -146,12 +146,14 @@ var markerArray = new Array();
 function initMap() {
   map = new google.maps.Map(
       document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+      {center: {lat: 37.422, lng: -122.084}, zoom: 16,
+    mapTypeId: 'roadmap'});
 
   map.addListener('click', (event) => {
     createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
   });
 
+  initAutocomplete();
   fetchMarkers();
   setMarkers();
 }
@@ -232,4 +234,84 @@ function setMarkers(map) {
   createMarkerForDisplay(38.9619118, -77.1967676, "Scott's Run");
   createMarkerForDisplay(39.2957353, -76.7852953, "Patapsco State Park");
   createMarkerForDisplay(34.0141701, -84.3504380, "Chattahoochee River");
+}
+
+function initAutocomplete() {
+
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      // markers.push(new google.maps.Marker({
+      //   map: map,
+      //   icon: icon,
+      //   title: place.name,
+      //   position: place.geometry.location
+      // }));
+      var centerControlDiv = document.createElement('div');
+
+      centerControlDiv.index = 1;
+      centerControlDiv.style['padding-top'] = '10px';
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+
+      var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to add hiking marker to the map';
+        //centerControlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.className = 'map-button';
+        controlText.textContent = 'Add Hiking Marker';
+        centerControlDiv.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlText.addEventListener('click', function() {
+          createMarkerForDisplay(place.geometry.location.lat(), place.geometry.location.lng(), place.name);
+        });
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
 }
