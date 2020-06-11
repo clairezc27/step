@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +36,8 @@ public class NewCommentServlet extends HttpServlet {
     }
 
     Date day = new Date();
+    DateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+    String strDate = df.format(day);
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
     String email = userService.getCurrentUser().getEmail();
@@ -42,7 +46,6 @@ public class NewCommentServlet extends HttpServlet {
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("text", comment);
     taskEntity.setProperty("timestamp", System.currentTimeMillis());
-    taskEntity.setProperty("date", day);
     taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
