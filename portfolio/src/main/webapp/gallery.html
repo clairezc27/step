@@ -36,9 +36,11 @@
 
 	<div id="gallery" class="box" style="text-align: center;">
 		<h2 class="title">Gallery</h2>
-		<button class="gallery-button" onclick="nextPic(-1);">Previous</button>
-		<div id="gallery-img-container"></div>
-		<button class="gallery-button" onclick="nextPic(1);">Next</button>
+    <div class="carousel">
+      <div id="left-img-container" class="gallery-img-container" onclick="nextPic(-1)"></div>
+      <div id="middle-img-container" class="gallery-img-container"></div>
+      <div id="right-img-container" class="gallery-img-container" onclick="nextPic(1)"></div>
+    </div>  
 	</div>
 
 	<div class="footer">Claire Chen &emsp; (240)-408-6371 &emsp; claireche@google.com

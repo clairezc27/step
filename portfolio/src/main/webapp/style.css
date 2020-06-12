@@ -69,7 +69,7 @@
 }
 
 .box {
-  width: 70%;
+  width: 80%;
   border: 20px solid mediumaquamarine;
   padding: 30px 50px;
   margin: auto;
@@ -120,12 +120,10 @@
   margin: auto;
 }
 
-#gallery-img-container {
-  margin: auto;
+.gallery-img-container {
   vertical-align: middle;
   display: inline-block;
-  padding-left: 3%;
-  padding-right: 3%;
+  z-index: 0;
 }
 
 ul.comments {
@@ -218,5 +216,12 @@ li.comment-item {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
   min-width: 66px;
   border-left: 0px;
+}
+
+.gallery-side {
+    width: 60%;
+    height: 60%;
+    opacity: 50%;
+    z-index: -1;
 }
 

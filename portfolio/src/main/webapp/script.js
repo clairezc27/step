@@ -50,19 +50,43 @@ function scrollGallery() {
 var picIndex = 0;
 
 function nextPic(n) {
+
   if (n < 0 && picIndex + n < 0) {
-      picIndex = 8;
+    picIndex = 8;
   } else {
     picIndex += n;
   }
-  const imgUrl = 'images/gallery-' + picIndex%9 + '.jpeg';
-  const imgElement = document.createElement('img');
-  imgElement.src = imgUrl;
+  var leftIndex = picIndex-1;
+  var rightIndex = picIndex+1;
+  if (picIndex == 0) {
+    leftIndex = 8;
+  }
+  console.log("left: " + leftIndex);
+  console.log("mid: " + picIndex);
+  console.log("right: " + rightIndex);
 
-  const imageContainer = document.getElementById('gallery-img-container');
+  const leftUrl = 'images/gallery-' + leftIndex%9 + '.jpeg';
+  const leftImg = document.createElement('img');
+  leftImg.src = leftUrl;
+  const left = document.getElementById('left-img-container');
+  left.innerHTML = "";
+  leftImg.className = 'gallery-side';
+  left.appendChild(leftImg);
 
-  imageContainer.innerHTML = "";
-  imageContainer.appendChild(imgElement);
+  const middleUrl = 'images/gallery-' + picIndex%9 + '.jpeg';
+  const middleImg = document.createElement('img');
+  middleImg.src = middleUrl;
+  const middle = document.getElementById('middle-img-container');
+  middle.innerHTML = "";
+  middle.appendChild(middleImg);
+
+  const rightUrl = 'images/gallery-' + rightIndex%9 + '.jpeg';
+  const rightImg = document.createElement('img');
+  rightImg.src = rightUrl;
+  const right = document.getElementById('right-img-container');
+  right.innerHTML = "";
+  rightImg.className = 'gallery-side';
+  right.appendChild(rightImg);
 }
 
 function loadPage() {
