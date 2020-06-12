@@ -50,7 +50,6 @@ function scrollGallery() {
 var picIndex = 0;
 
 function nextPic(n) {
-
   if (n < 0 && picIndex + n < 0) {
     picIndex = 8;
   } else {
