@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,6 @@ public class NewCommentServlet extends HttpServlet {
       return;
     }
 
-    Date day = new Date();
     String name = request.getParameter("name");
     String comment = request.getParameter("comment");
     String email = userService.getCurrentUser().getEmail();
@@ -42,7 +40,6 @@ public class NewCommentServlet extends HttpServlet {
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("text", comment);
     taskEntity.setProperty("timestamp", System.currentTimeMillis());
-    taskEntity.setProperty("date", day);
     taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

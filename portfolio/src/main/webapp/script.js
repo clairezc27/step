@@ -102,12 +102,9 @@ function getData() {
 function createListElement(str) {
   const liElement = document.createElement('li');
   liElement.className = 'comment-item';
-  const dateElement = document.createElement('date');
-  dateElement.innerText = str.date;
   const commentElement = document.createElement('comment');
   commentElement.innerText = str.name + ": " + str.text;
 
-  liElement.appendChild(dateElement);
   liElement.appendChild(document.createElement("br"));
   liElement.appendChild(commentElement);
   return liElement;
@@ -146,12 +143,13 @@ var markerArray = new Array();
 function initMap() {
   map = new google.maps.Map(
       document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+      {center: {lat: 37.422, lng: -122.084}, zoom: 16, mapTypeId: 'roadmap'});
 
   map.addListener('click', (event) => {
     createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
   });
 
+  initAutocomplete();
   fetchMarkers();
   setMarkers();
 }
@@ -232,4 +230,53 @@ function setMarkers(map) {
   createMarkerForDisplay(38.9619118, -77.1967676, "Scott's Run");
   createMarkerForDisplay(39.2957353, -76.7852953, "Patapsco State Park");
   createMarkerForDisplay(34.0141701, -84.3504380, "Chattahoochee River");
+}
+
+function initAutocomplete() {
+
+  var inputDiv = document.createElement('div');
+  inputDiv.index = 1;
+  inputDiv.style['padding-top'] = '10px';
+  inputDiv.style['padding-right'] = '10px';
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(inputDiv);
+
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  inputDiv.appendChild(input);
+
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        return;
+      }
+
+      var addMarkerDiv = document.createElement('div');
+      addMarkerDiv.index = 1;
+      addMarkerDiv.style['padding-top'] = '10px';
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(addMarkerDiv);
+
+      var addMarkerBtn = document.createElement('div');
+      addMarkerBtn.className = 'map-button';
+      addMarkerBtn.textContent = 'Add Hiking Marker';
+      addMarkerDiv.appendChild(addMarkerBtn);
+
+      addMarkerBtn.addEventListener('click', function() {
+        createMarkerForDisplay(place.geometry.location.lat(), place.geometry.location.lng(), place.name);
+      });
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
 }
