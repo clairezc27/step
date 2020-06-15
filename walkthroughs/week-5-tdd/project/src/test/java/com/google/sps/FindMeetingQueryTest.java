@@ -122,7 +122,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void overlappingEvents() {
+  public void overlappingEvents() {System.out.println("overlap");
     // Have an event for each person, but have their events overlap. We should only see two options.
     //
     // Events  :       |--A--|
