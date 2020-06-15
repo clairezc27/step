@@ -79,7 +79,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void eventSplitsRestriction() {
+  public void eventSplitsRestriction() {System.out.println("restriction");
     // The event should split the day into two options (before and after the event).
     Collection<Event> events = Arrays.asList(new Event("Event 1",
         TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES), Arrays.asList(PERSON_A)));
