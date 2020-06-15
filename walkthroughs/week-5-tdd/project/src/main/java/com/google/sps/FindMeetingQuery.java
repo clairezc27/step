@@ -52,8 +52,8 @@ public final class FindMeetingQuery {
         start = eventStart + e.getWhen().duration(); 
       } else {
         if (eventStart - start >= meetingLen) {
-        TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
-        toReturn.add(toAdd);
+          TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
+          toReturn.add(toAdd);
         }
         start = eventEnd;
         
