@@ -79,7 +79,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void eventSplitsRestriction() {System.out.println("restriction");
+  public void eventSplitsRestriction() {
     // The event should split the day into two options (before and after the event).
     Collection<Event> events = Arrays.asList(new Event("Event 1",
         TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES), Arrays.asList(PERSON_A)));
@@ -122,7 +122,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void overlappingEvents() {System.out.println("overlap");
+  public void overlappingEvents() {
     // Have an event for each person, but have their events overlap. We should only see two options.
     //
     // Events  :       |--A--|

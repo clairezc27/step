@@ -27,14 +27,13 @@ public final class FindMeetingQuery {
     }
 
     ArrayList<Event> cleanedEvents = removeNonrequiredMeeting(events, request);
-    System.out.println("remove nonrequired " + cleanedEvents);
     cleanedEvents = removeOverlap(cleanedEvents);
-    System.out.println("cleaned: " + cleanedEvents);
 
     ArrayList<TimeRange> toReturn = new ArrayList<TimeRange>();
     int start = TimeRange.START_OF_DAY;
     boolean endDay = true;
     int endTime = 0;
+    long meetingLen = request.getDuration();
 
     Iterator<Event> iter = cleanedEvents.iterator();
 
@@ -51,18 +50,19 @@ public final class FindMeetingQuery {
       //account for event at beginning of day
       if (eventStart == start) {
         start = eventStart + e.getWhen().duration(); 
+      } else {
+        if (eventStart - start >= meetingLen) {
+        TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
+        toReturn.add(toAdd);
+        }
+        start = eventEnd;
+        
+        //check if there's available meeting time after last event
+        if (eventStart + e.getWhen().duration() < TimeRange.END_OF_DAY) {
+          endDay = false;
+          endTime = eventEnd;
+        }
       }
-
-      TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
-      toReturn.add(toAdd);
-      start = eventEnd;
-      
-      //check if there's available meeting time after last event
-      if (eventStart + e.getWhen().duration() < TimeRange.END_OF_DAY) {
-        endDay = false;
-        endTime = eventEnd;
-      }
-      
     }
 
     //add meeting after last event
@@ -70,7 +70,6 @@ public final class FindMeetingQuery {
       toReturn.add(TimeRange.fromStartEnd(endTime, TimeRange.END_OF_DAY, true));
     }
 
-    System.out.println("final: " + toReturn);
     return toReturn;  
   }
 
@@ -122,7 +121,7 @@ public final class FindMeetingQuery {
     if (isStart) {
       newEventList.add(prev);
     }
-    
+
     return newEventList;
   }
 }
