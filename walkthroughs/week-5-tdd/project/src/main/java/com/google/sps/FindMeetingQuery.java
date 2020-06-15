@@ -17,6 +17,7 @@ package com.google.sps;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -28,26 +29,35 @@ public final class FindMeetingQuery {
     if (events.isEmpty()) {
       return Arrays.asList(TimeRange.WHOLE_DAY);
     }
-    ArrayList<TimeRange> timeList = new ArrayList<>();
-    Collection<TimeRange> toReturn = new ArrayList<TimeRange>();
+
+    ArrayList<TimeRange> toReturn = new ArrayList<TimeRange>();
     int start = TimeRange.START_OF_DAY;
     boolean endDay = true;
     int endTime = 0;
-    for (Event e : events) {
-      int eventStart = e.getWhen().start();
-      int eventEnd = eventStart + e.getWhen().duration();
-      if (eventStart == start) {
-        start = eventStart + e.getWhen().duration(); 
-      }
+    Event prev = null;
 
-      TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
-      toReturn.add(toAdd);
-      start = eventEnd;
-      
-      if (eventStart + e.getWhen().duration() < TimeRange.END_OF_DAY) {
-        endDay = false;
-        endTime = eventEnd;
+    Iterator<Event> iter = events.iterator();
+    while (iter.hasNext()) {
+      Event e = iter.next();
+      if (prev != null && isOverlap(prev, e)) {
+        start = prev.getWhen().start();
+      } else {
+        int eventStart = e.getWhen().start();
+        int eventEnd = eventStart + e.getWhen().duration();
+        if (eventStart == start) {
+          start = eventStart + e.getWhen().duration(); 
+        }
+
+        TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
+        toReturn.add(toAdd);
+        start = eventEnd;
+        
+        if (eventStart + e.getWhen().duration() < TimeRange.END_OF_DAY) {
+          endDay = false;
+          endTime = eventEnd;
+        }
       }
+      prev = e;
     }
 
     if (!endDay) {
@@ -55,5 +65,9 @@ public final class FindMeetingQuery {
     }
 
     return toReturn;
+  }
+
+  private boolean isOverlap(Event e1, Event e2) {
+    return e1.getWhen().start() + e1.getWhen().duration() > e2.getWhen().start();
   }
 }
