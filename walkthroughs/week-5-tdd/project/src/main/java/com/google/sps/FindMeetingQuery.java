@@ -26,7 +26,12 @@ public final class FindMeetingQuery {
       return Arrays.asList();
     }
 
-    ArrayList<Event> cleanedEvents = removeNonrequiredMeeting(events, request);
+    Collection<String> attendeeList = request.getAttendees();
+    if (attendeeList.isEmpty() && !request.getOptionalAttendees().isEmpty()) {
+      attendeeList = request.getOptionalAttendees();
+    }
+
+    ArrayList<Event> cleanedEvents = removeNonrequiredMeeting(events, attendeeList);
     cleanedEvents = removeOverlap(cleanedEvents);
 
     ArrayList<TimeRange> toReturn = new ArrayList<TimeRange>();
@@ -78,12 +83,12 @@ public final class FindMeetingQuery {
     return e1.getWhen().start() + e1.getWhen().duration() > e2.getWhen().start();
   }
 
-  private ArrayList<Event> removeNonrequiredMeeting(Collection<Event> events, MeetingRequest meeting) {
+  private ArrayList<Event> removeNonrequiredMeeting(Collection<Event> events, Collection<String> attendees) {
     ArrayList<Event> newEventList = new ArrayList<>();
     for (Event e : events) {
       boolean required = false;
       for(String attendee : e.getAttendees()) {
-        if (meeting.getAttendees().contains(attendee)) {
+        if (attendees.contains(attendee)) {
           required = true;
         }
       }
