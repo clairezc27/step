@@ -70,7 +70,8 @@ public final class FindMeetingQuery {
       toReturn.add(TimeRange.fromStartEnd(endTime, TimeRange.END_OF_DAY, true));
     }
 
-    return toReturn;  
+
+    return checkOptionalAttendee(toReturn, events, request);  
   }
 
   private boolean isOverlap(Event e1, Event e2) {
@@ -124,4 +125,29 @@ public final class FindMeetingQuery {
 
     return newEventList;
   }
+
+  private Collection<TimeRange> checkOptionalAttendee(ArrayList<TimeRange> meetingTimes, Collection<Event> events, MeetingRequest request) {
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    boolean optionalAvailable = true;
+    ArrayList<TimeRange> toReturn = new ArrayList<>();
+    for (TimeRange time : meetingTimes) {
+      for (String attendee : optionalAttendees) {
+        for (Event e : events) {
+          if (e.getAttendees().contains(attendee) && time.overlaps(e.getWhen())) {
+            optionalAvailable = false;
+          }
+        }
+      }
+      if (optionalAvailable) {
+        toReturn.add(time);
+      }
+      optionalAvailable = true;
+    }
+
+    if (toReturn.isEmpty()) {
+      return meetingTimes;
+    }
+    return toReturn;
+  }
+
 }
