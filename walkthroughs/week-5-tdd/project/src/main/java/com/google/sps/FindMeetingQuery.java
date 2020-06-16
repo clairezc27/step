@@ -26,7 +26,12 @@ public final class FindMeetingQuery {
       return Arrays.asList();
     }
 
-    ArrayList<Event> cleanedEvents = removeNonrequiredMeeting(events, request);
+    Collection<String> attendeeList = request.getAttendees();
+    if (attendeeList.isEmpty() && !request.getOptionalAttendees().isEmpty()) {
+      attendeeList = request.getOptionalAttendees();
+    }
+
+    ArrayList<Event> cleanedEvents = removeNonrequiredMeeting(events, attendeeList);
     cleanedEvents = removeOverlap(cleanedEvents);
 
     ArrayList<TimeRange> toReturn = new ArrayList<TimeRange>();
@@ -52,8 +57,8 @@ public final class FindMeetingQuery {
         start = eventStart + e.getWhen().duration(); 
       } else {
         if (eventStart - start >= meetingLen) {
-        TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
-        toReturn.add(toAdd);
+          TimeRange toAdd = TimeRange.fromStartEnd(start, eventStart, false);
+          toReturn.add(toAdd);
         }
         start = eventEnd;
         
@@ -70,19 +75,20 @@ public final class FindMeetingQuery {
       toReturn.add(TimeRange.fromStartEnd(endTime, TimeRange.END_OF_DAY, true));
     }
 
-    return toReturn;  
+
+    return checkOptionalAttendee(toReturn, events, request);  
   }
 
   private boolean isOverlap(Event e1, Event e2) {
     return e1.getWhen().start() + e1.getWhen().duration() > e2.getWhen().start();
   }
 
-  private ArrayList<Event> removeNonrequiredMeeting(Collection<Event> events, MeetingRequest meeting) {
+  private ArrayList<Event> removeNonrequiredMeeting(Collection<Event> events, Collection<String> attendees) {
     ArrayList<Event> newEventList = new ArrayList<>();
     for (Event e : events) {
       boolean required = false;
       for(String attendee : e.getAttendees()) {
-        if (meeting.getAttendees().contains(attendee)) {
+        if (attendees.contains(attendee)) {
           required = true;
         }
       }
@@ -124,4 +130,29 @@ public final class FindMeetingQuery {
 
     return newEventList;
   }
+
+  private Collection<TimeRange> checkOptionalAttendee(ArrayList<TimeRange> meetingTimes, Collection<Event> events, MeetingRequest request) {
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    boolean optionalAvailable = true;
+    ArrayList<TimeRange> toReturn = new ArrayList<>();
+    for (TimeRange time : meetingTimes) {
+      for (String attendee : optionalAttendees) {
+        for (Event e : events) {
+          if (e.getAttendees().contains(attendee) && time.overlaps(e.getWhen())) {
+            optionalAvailable = false;
+          }
+        }
+      }
+      if (optionalAvailable) {
+        toReturn.add(time);
+      }
+      optionalAvailable = true;
+    }
+
+    if (toReturn.isEmpty()) {
+      return meetingTimes;
+    }
+    return toReturn;
+  }
+
 }
